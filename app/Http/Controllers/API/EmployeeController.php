@@ -18,9 +18,10 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
+        $pageOffset = $request->query('pageOffset', 5);
         $column = $request->query('_sort', 'id');
         $order = $request->query('_order', 'asc');
-        return EmployeeResource::collection(Employee::orderBy($column, $order)->paginate(4));
+        return EmployeeResource::collection(Employee::orderBy($column, $order)->paginate($pageOffset));
     }
 
     /**
