@@ -22,7 +22,7 @@ class AuthController extends Controller
      */
     public function register(RegisterRequest $request): JsonResponse
     {
-        dd($request->only('email'));
+        // dd($request->only('email'));
         
         $userData = $request->validated();
 
