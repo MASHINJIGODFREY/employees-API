@@ -12,14 +12,15 @@ class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index($order = 'asc')
+    public function index(Request $request)
     {
-        // $employees = Employee::paginate(5);
-        // return response([ 'employees' => EmployeeResource::collection(Employee::paginate(4)),'message' => 'Successful'], 200);
-        return EmployeeResource::collection(Employee::orderBy('age',$order)->paginate(4));
+        $column = $request->query('_sort', 'id');
+        $order = $request->query('_order', 'asc');
+        return EmployeeResource::collection(Employee::orderBy($column, $order)->paginate(4));
     }
 
     /**
